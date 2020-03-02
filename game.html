@@ -14,7 +14,102 @@
     
     <script type="text/processing">
     
-      /*  INSERT CODE HERE */
+      float Width = 40;
+float Height = 90;
+boolean upLeft, downLeft;
+boolean upRight, downRight;
+int paddleXLeft, paddleYLeft;
+int paddleXRight, paddleYRight;
+int paddleWidth, paddleHeight;
+int paddleSpeed;
+int x;
+int y;
+int h;
+int w;
+float xVel;
+float yVel;
+public void setup(){
+    size(1000,800);
+    paddleXLeft = 40;
+    paddleYLeft = height/2;
+    paddleXRight = width-70;
+    paddleYRight = height/2;
+    paddleWidth = 30;
+    paddleHeight = 100;
+    paddleSpeed = 5;
+    
+}
+void draw(){
+  background(0);
+  drawPaddles();
+  movePaddles();
+  stopPaddles();
+  drawBall();
+}
+void drawPaddles(){
+  rect(paddleXLeft, paddleYLeft, paddleWidth, paddleHeight);
+  rect(paddleXRight, paddleYRight, paddleWidth, paddleHeight);
+}
+void movePaddles() {
+  if (upLeft == true) {
+    paddleYLeft = paddleYLeft - paddleSpeed;
+  }
+  if (downLeft == true) {
+    paddleYLeft = paddleYLeft + paddleSpeed;
+  }
+  if (upRight == true) {
+    paddleYRight = paddleYRight - paddleSpeed;
+  }
+  if (downRight == true) {
+    paddleYRight = paddleYRight + paddleSpeed;
+  }
+}
+void stopPaddles() {
+  if (paddleYLeft - paddleHeight/2 < 0) {
+    paddleYLeft = paddleYLeft + paddleSpeed;
+  }
+  if (paddleYLeft + paddleHeight/2 > height) {
+    paddleYLeft = paddleYLeft - paddleSpeed;
+  }
+  if (paddleYRight - paddleHeight/2 < 0) {
+    paddleYRight = paddleYRight + paddleSpeed;
+  }
+  if (paddleYRight + paddleHeight/2 > height) {
+    paddleYRight = paddleYRight - paddleSpeed;
+  }
+}
+void drawBall(){
+    ellipse(x,y,w,h);     
+    fill(255,255,255);
+}
+void keyPressed() {
+if (key == 'w') {
+    upLeft = true;
+  }
+  if (key == 's') {
+    downLeft = true;
+  }
+  if (keyCode == UP) {
+    upRight = true;
+  }
+  if (keyCode == DOWN) {
+    downRight = true;
+  }
+}
+void keyReleased() {
+  if (key == 'w') {
+    upLeft = false;
+  }
+  if (key == 's') {
+    downLeft = false;
+  }
+  if (keyCode == UP) {
+    upRight = false;
+  }
+  if (keyCode == DOWN) {
+    downRight = false;
+  }
+}
     </script>
     <canvas id="sketch" style="border: 1px solid black;"></canvas>
     
